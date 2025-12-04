@@ -1,0 +1,244 @@
+/*!
+ * GalleryJs v1.0.0
+ * Copyright 2025 WebUtilsHub
+ * Website: https://www.webutilshub.com/
+ */
+
+.galleryJs-bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.85);
+    z-index: 9999998;
+    opacity: 0;
+    visibility: hidden;
+    transition: 300ms all ease-in-out;
+    -o-transition: 300ms all ease-in-out;
+    -ms-transition: 300ms all ease-in-out;
+    -moz-transition: 300ms all ease-in-out;
+    -webkit-transition: 300ms all ease-in-out;
+}
+.galleryJs-bg.active{
+    opacity: 1;
+    visibility: visible;
+}
+.galleryJs-bg .btn-galleryJs-close{
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    display: block;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+.galleryJs-bg .btn-galleryJs-close::before,
+.galleryJs-bg .btn-galleryJs-close::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #FFF;
+    opacity: .75;
+    transition: 300ms all ease-in-out;
+    -o-transition: 300ms all ease-in-out;
+    -ms-transition: 300ms all ease-in-out;
+    -moz-transition: 300ms all ease-in-out;
+    -webkit-transition: 300ms all ease-in-out;
+}
+.galleryJs-bg .btn-galleryJs-close::before{
+    transform: rotate(-45deg);
+}
+.galleryJs-bg .btn-galleryJs-close::after{
+    transform: rotate(45deg);
+}
+.galleryJs-bg .btn-galleryJs-close:hover::before,
+.galleryJs-bg .btn-galleryJs-close:hover::after{
+    opacity: 1;
+}
+.galleryJs-bg .btn-galleryJs-prev,
+.galleryJs-bg .btn-galleryJs-next{
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+    display: block;
+    width: 0;
+    height: 0;
+    border: solid 40px transparent;
+    opacity: .75;
+    z-index: 5;
+    transition: 300ms all ease-in-out;
+    -o-transition: 300ms all ease-in-out;
+    -ms-transition: 300ms all ease-in-out;
+    -moz-transition: 300ms all ease-in-out;
+    -webkit-transition: 300ms all ease-in-out;
+}
+.galleryJs-bg .btn-galleryJs-prev{
+    left: 20px;
+    border-right-color: #FFF;
+}
+.galleryJs-bg .btn-galleryJs-next{
+    right: 20px;
+    border-left-color: #FFF;
+}
+.galleryJs-bg .btn-galleryJs-prev:hover,
+.galleryJs-bg .btn-galleryJs-next:hover{
+    opacity: 1;
+}
+.galleryJs-bg .btn-galleryJs-prev.btn-galleryJs-disabled{
+    border-right-color: #777!important;
+    cursor: default;
+    opacity: 1;
+}
+.galleryJs-bg .btn-galleryJs-next.btn-galleryJs-disabled{
+    border-left-color: #777!important;
+    cursor: default;
+    opacity: 1;
+}
+.galleryJs-bg .galleryJs-pagination{
+    position: absolute;
+    left: 0;
+    bottom: 15px;
+    width: 100%;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 10px;
+    line-height: 20px;
+    color: #FFF;
+    text-shadow: 0 2px 6px #000;
+}
+
+.galleryJs-wrapper{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 95vh;
+    max-width: 90%;
+    max-height: 95%;
+    background-color: transparent;
+    overflow: hidden;
+    transform: translate(-50%, -50%);
+}
+.galleryJs-wrapper .galleryJs-items{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    min-width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    font-size: 0;
+    transition: 300ms all ease-in-out;
+    -o-transition: 300ms all ease-in-out;
+    -ms-transition: 300ms all ease-in-out;
+    -moz-transition: 300ms all ease-in-out;
+    -webkit-transition: 300ms all ease-in-out;
+}
+.galleryJs-wrapper .galleryJs-items .galleryJs-item{
+    /* position: relative; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 800px;
+    height: 100%;
+    max-width: 100%;
+    vertical-align: middle;
+    opacity: 0;
+    visibility: hidden;
+    transition: 300ms all ease-in-out;
+    -o-transition: 300ms all ease-in-out;
+    -ms-transition: 300ms all ease-in-out;
+    -moz-transition: 300ms all ease-in-out;
+    -webkit-transition: 300ms all ease-in-out;
+}
+.galleryJs-wrapper .galleryJs-items .galleryJs-item.current{
+    opacity: 1;
+    visibility: visible;
+}
+.galleryJs-wrapper .galleryJs-items .galleryJs-item.zoomed{
+    overflow: auto;
+}
+.galleryJs-wrapper .galleryJs-items .galleryJs-item .galleryJs-image{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    cursor: zoom-in;
+}
+.galleryJs-wrapper .galleryJs-items .galleryJs-item.zoomed .galleryJs-image{
+    width: 200%;
+    height: 200%;
+    cursor: zoom-out;
+}
+.galleryJs-wrapper .galleryJs-items .galleryJs-item .galleryJs-image img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+.galleryJs-wrapper .galleryJs-items .galleryJs-item .galleryJs-video{
+    background-color: #000;
+}
+.galleryJs-wrapper .galleryJs-items .galleryJs-item .galleryJs-caption{
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #FFF;
+    text-align: center;
+    text-shadow: 0 2px 6px #000;
+}
+.galleryJs-wrapper .galleryJs-items .galleryJs-item .galleryJs-caption small{
+    display: block;
+}
+.galleryJs-wrapper .galleryJs-items .galleryJs-item .galleryJs-youtube{
+    position: relative;
+    top: 50%;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    transform: translateY(-50%);
+}
+
+@media only screen and (max-width: 767px) {
+    .galleryJs-bg{
+        background-color: rgba(0,0,0,.85);
+    }
+    .galleryJs-bg .btn-galleryJs-close{
+        top: 20px;
+        right: 15px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .galleryJs-bg .btn-galleryJs-prev,
+    .galleryJs-bg .btn-galleryJs-next{
+        border-width: 15px;
+    }
+    .galleryJs-bg .btn-galleryJs-prev{
+        left: 0;
+    }
+    .galleryJs-bg .btn-galleryJs-next{
+        right: 0;
+    }
+
+    .galleryJs-wrapper{
+        height: 0;
+        padding-top: 100%;
+    }
+    .galleryJs-wrapper .galleryJs-items .galleryJs-item .galleryJs-caption{
+        padding: 2px 5px;
+        text-align: right;
+    }
+}
