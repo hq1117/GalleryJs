@@ -24,7 +24,7 @@ window.onload = function() {
             $('body').on('click', 'a[data-galleryjs]', function(e) {
                 e.preventDefault();
 
-                const regex = /\.(mp4|mov)$/;
+                const regex = /\.(mp4|mov|webm)$/;
                 const youtube = /https?:\/\/(www\.)?(youtube\.com\/|youtu\.be\/)/g;
 
                 let YouTube_loaded = false;
