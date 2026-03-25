@@ -1,6 +1,6 @@
 /*!
- * GalleryJs v1.0.0
- * Copyright 2025 WebUtilsHub
+ * GalleryJs v1.0.1
+ * Copyright 2026 WebUtilsHub
  * Website: https://www.webutilshub.com/
  * Author: Hq
  */
