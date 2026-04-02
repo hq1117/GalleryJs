@@ -1,5 +1,5 @@
 /*!
- * GalleryJs v1.0.1
+ * GalleryJs v1.0.2
  * Copyright 2026 WebUtilsHub
  * Website: https://www.webutilshub.com/
  * Author: Hq
@@ -12,6 +12,11 @@ var galleryJs_active = false;
 var galleryJs_video = null;
 var galleryJs_yt_players = [];
 var galleryJs_hasYouTube = false;
+const videoMimeTypes = {
+    'mp4': 'video/mp4',
+    'mov': 'video/quicktime',
+    'webm': 'video/webm'
+};
 
 window.onload = function() {
     if( window.jQuery ) {
@@ -24,8 +29,10 @@ window.onload = function() {
             $('body').on('click', 'a[data-galleryjs]', function(e) {
                 e.preventDefault();
 
-                const regex = /\.(mp4|mov|webm)$/;
-                const youtube = /https?:\/\/(www\.)?(youtube\.com\/|youtu\.be\/)/g;
+                //const regex = /\.(mp4|mov|webm)$/;
+                const extensions = Object.keys(videoMimeTypes).join('|');
+                const regex = new RegExp(`\\.(${extensions})$`, 'i');
+                const youtube = /https?:\/\/(www\.)?(youtube\.com\/|youtu\.be\/)/;
 
                 let YouTube_loaded = false;
 
@@ -55,12 +62,16 @@ window.onload = function() {
                     num++;
 
                     gallery_wrapper += '<div class="galleryJs-item">\n';
-                    if( source.match( regex ) ) {
+                    const videoMatch = source.match( regex );
+                    if( videoMatch ) {
+                        const ext = match[1].toLowerCase();
+                        const mimeType = videoMimeTypes[ext];
+
                         gallery_wrapper += '<video id="galleryJs-video-' + i + '" class="galleryJs-video" width="100%" height="100%" controls>\n';
-                        gallery_wrapper += '<source src="' + source + '" type="video/mp4">';
+                        gallery_wrapper += '<source src="' + source + '" type="' + mimeType + '">';
                         gallery_wrapper += 'Your browser does not support the video tag.';
                         gallery_wrapper += '</video>\n';
-                    } else if( source.match( youtube ) ) {
+                    } else if( youtube.test( source ) ) {
                         galleryJs_hasYouTube = true;
                         if( !YouTube_loaded ) {
                             var tag = document.createElement('script');
