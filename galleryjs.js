@@ -1,5 +1,5 @@
 /*!
- * GalleryJs v1.0.3
+ * GalleryJs v1.0.4
  * Copyright 2026 WebUtilsHub
  * Website: https://www.webutilshub.com/
  * Author: Hq
@@ -64,7 +64,7 @@ window.onload = function() {
                     gallery_wrapper += '<div class="galleryJs-item">\n';
                     const videoMatch = source.match( regex );
                     if( videoMatch ) {
-                        const ext = match[1].toLowerCase();
+                        const ext = videoMatch[1].toLowerCase();
                         const mimeType = videoMimeTypes[ext];
 
                         gallery_wrapper += '<video id="galleryJs-video-' + i + '" class="galleryJs-video" width="100%" height="100%" controls>\n';
